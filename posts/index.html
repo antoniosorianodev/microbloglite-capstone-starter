@@ -1,6 +1,7 @@
 <!-- POSTS page -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,10 +24,12 @@
 
     <!-- Run BEFORE page is finished loading (before window.onload): -->
     <script src="../auth.js"></script>
+    <script src="../global.js"></script>
     <script>
         if (isLoggedIn() === false) window.location.replace("/");
     </script>
 </head>
+
 <body>
 
     <header>
@@ -40,4 +43,5 @@
     <!-- Page-specific code -->
     <script src="./posts.js"></script>
 </body>
+
 </html>
