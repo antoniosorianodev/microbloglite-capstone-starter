@@ -7,6 +7,9 @@ window.onload = () => {
     const token = parseLoginData("token");
 
     displayProfileData(username, token);
+
+    const logoutButton = document.querySelector("#logoutButton");
+    logoutButton.addEventListener("click", logout);
 }
 
 function parseLoginData(property) {
