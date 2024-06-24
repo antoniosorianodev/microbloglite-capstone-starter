@@ -25,7 +25,7 @@
     <script src="../auth.js"></script>
     <script src="../global.js"></script>
     <script>
-        if (isLoggedIn() === true) window.location.replace("/posts");
+        if (isLoggedIn() === false) window.location.replace("/");
     </script>
 </head>
 
@@ -41,18 +41,16 @@
             </a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../index.html">Home</a>
+                    <a class="nav-link" aria-current="page" href="../">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../profile/index.html">Profile</a>
+                    <a class="nav-link active" aria-current="page" href="../profile/">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../posts/index.html">Posts</a>
+                    <a class="nav-link" aria-current="page" href="../posts/">Posts</a>
                 </li>
             </ul>
-            <a href="./index.html" class="btn btn-secondary" role="button" id="LogoutButton">Logout</a>
-            <a href="../register/index.html" class="btn btn-secondary" role="button" id="registerButton">Register</a>
-            <a href="../index.html" class="btn btn-secondary" role="button" id="loginButton">Login</a>
+            <a href="./" class="btn btn-secondary" role="button" id="LogoutButton">Logout</a>
         </div>
     </nav>
 
@@ -62,19 +60,7 @@
 
     <main>
 
-        <form id="register">
-            <div>
-                <label for="username">Username</label>
-                <input type="text" id="username" minlength="3">
-            </div>
-
-            <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" minlength="6">
-            </div>
-
-            <button class="btn btn-success" id="registerButton" type="submit">Register</button>
-        </form>
+        your info here
 
     </main>
 

@@ -27,6 +27,7 @@ async function createUser(event) {
 
         if (response.status === 201) {
             alert("Success! New user created");
+            window.location.href = "../"
         } else if (response.status === 409) {
             alert("Sorry, that user already exists");
         }
