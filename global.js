@@ -4,6 +4,9 @@
 
 // "use strict"
 
+// const logoutButton = document.querySelectorAll("#logoutButton");
+// logoutButton.addEventListener("click", logout);
+
 // function hideShowLoginButtons() {
 //     const profile = document.querySelector("#profileLink");
 //     const login = document.querySelector("#loginButton");

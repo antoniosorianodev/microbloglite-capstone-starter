@@ -4,6 +4,9 @@ window.onload = () => {
     const registerForm = document.querySelector("#register");
 
     registerForm.addEventListener("submit", (event) => createUser(event));
+
+    const logoutButton = document.querySelector("#logoutButton");
+    logoutButton.addEventListener("click", logout);
 }
 
 async function createUser(event) {
