@@ -1,4 +1,3 @@
-<!-- POSTS page -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -15,18 +14,18 @@
         crossorigin="anonymous"></script>
 
     <!-- Global CSS (CSS rules you want applied to all pages) -->
-    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="./global.css">
 
     <!-- Page-specific CSS -->
-    <link rel="stylesheet" href="./posts.css">
+    <link rel="stylesheet" href="./landing.css">
 
-    <title>/POSTS</title>
+    <title>Login to the Microblog Network!</title>
 
-    <!-- Run BEFORE page is finished loading (before window.onload): -->
+    <!-- Run BEFORE page is finished loading (before window.onload - don't add the `defer` attribute): -->
     <script src="../auth.js"></script>
     <script src="../global.js"></script>
     <script>
-        if (isLoggedIn() === false) window.location.replace("/");
+        if (isLoggedIn() === true) window.location.replace("/posts");
     </script>
 </head>
 
@@ -47,26 +46,42 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="../profile/index.html">Profile</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" aria-current="page" href="./index.html">Posts</a>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../posts/index.html">Posts</a>
                 </li>
             </ul>
             <a href="./index.html" class="btn btn-secondary" role="button" id="LogoutButton">Logout</a>
-            <a href="./register/index.html" class="btn btn-secondary" role="button" id="registerButton">Register</a>
+            <a href="../register/index.html" class="btn btn-secondary" role="button" id="registerButton">Register</a>
             <a href="../index.html" class="btn btn-secondary" role="button" id="loginButton">Login</a>
         </div>
     </nav>
 
     <header>
-        <h1>POSTS PAGE</h1>
+        <h1>Welcome to <code>PROFILE PAGE</code></h1>
     </header>
 
-    <main></main>
+    <main>
+
+        <form id="register">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" id="username" minlength="3">
+            </div>
+
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" minlength="6">
+            </div>
+
+            <button class="btn btn-success" id="registerButton" type="submit">Register</button>
+        </form>
+
+    </main>
 
     <footer></footer>
 
     <!-- Page-specific code -->
-    <script src="./posts.js"></script>
+    <script src="./landing.js"></script>
 </body>
 
 </html>

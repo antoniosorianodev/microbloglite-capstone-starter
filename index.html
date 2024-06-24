@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,14 +23,41 @@
 
     <!-- Run BEFORE page is finished loading (before window.onload - don't add the `defer` attribute): -->
     <script src="./auth.js"></script>
+    <script src="./global.js"></script>
     <script>
         if (isLoggedIn() === true) window.location.replace("/posts");
     </script>
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plugin"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0" />
+                </svg>
+            </a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../profile/index.html">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../posts/index.html">Posts</a>
+                </li>
+            </ul>
+            <a href="./index.html" class="btn btn-secondary" role="button" id="LogoutButton">Logout</a>
+            <a href="../register/index.html" class="btn btn-secondary" role="button" id="registerButton">Register</a>
+            <a href="../index.html" class="btn btn-secondary" role="button" id="loginButton">Login</a>
+        </div>
+    </nav>
 
     <header>
-        <h1>Welcome to <code>YOUR MICROBLOG NETWORK</code></h1>
+        <h1>Welcome to <code>LOGIN PAGE</code></h1>
     </header>
 
     <main>
@@ -45,7 +73,7 @@
                 <input type="password" id="password" minlength="6">
             </div>
 
-            <button id="loginButton" type="submit">Login</button>
+            <button class="btn btn-primary" id="loginButton" type="submit">Login</button>
         </form>
 
     </main>
@@ -55,4 +83,5 @@
     <!-- Page-specific code -->
     <script src="./landing.js"></script>
 </body>
+
 </html>
