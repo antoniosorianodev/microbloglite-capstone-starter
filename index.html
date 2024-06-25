@@ -14,7 +14,7 @@
         crossorigin="anonymous"></script>
 
     <!-- Global CSS (CSS rules you want applied to all pages) -->
-    <link rel="stylesheet" href="./global.css">
+    <link rel="stylesheet" href="../global.css">
 
     <!-- Page-specific CSS -->
     <link rel="stylesheet" href="./landing.css">
@@ -22,15 +22,14 @@
     <title>Login to the Microblog Network!</title>
 
     <!-- Run BEFORE page is finished loading (before window.onload - don't add the `defer` attribute): -->
-    <script src="./auth.js"></script>
-    <script src="./global.js"></script>
+    <script src="../auth.js"></script>
     <script>
         if (isLoggedIn() === true) window.location.replace("/posts");
     </script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plugin"
@@ -40,11 +39,8 @@
                 </svg>
             </a>
 
-            <!-- meh, since the user is going to get redirected anyway, why bother actually sending them to the profile page -->
+            <!-- meh, since the user is going to get redirected anyway, why bother actually sending them to the walled off pages -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./">Home</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="./">Profile</a>
                 </li>
@@ -52,26 +48,26 @@
                     <a class="nav-link" aria-current="page" href="./">Posts</a>
                 </li>
             </ul>
-            <a href="./" class="btn btn-secondary" role="button" id="loginButton">Login</a>
-            <a href="../register/" class="btn btn-secondary" role="button" id="registerButton">Register</a>
+            <a href="./" class="btn btn-primary mx-3" role="button" id="loginButton">Login</a>
+            <a href="../register/" class="btn btn-success" role="button" id="registerButton">Register</a>
         </div>
     </nav>
 
-    <header>
-        <h1>Welcome to <code>LOGIN PAGE</code></h1>
-    </header>
 
-    <main>
+    <main class="d-flex flex-column align-items-center">
+        <header class="my-3">
+            <h1>Welcome to <code>LOGIN PAGE</code></h1>
+        </header>
 
-        <form id="login">
+        <form class="card w-25 p-3" id="login" autocomplete="off">
             <div>
                 <label for="username">Username</label>
-                <input type="text" id="username" minlength="3">
+                <input class="form-control mb-3" type="text" id="username" minlength="3">
             </div>
 
             <div>
                 <label for="password">Password</label>
-                <input type="password" id="password" minlength="6">
+                <input class="form-control mb-3" type="password" id="password" minlength="6">
             </div>
 
             <button class="btn btn-primary" id="loginButton" type="submit">Login</button>
