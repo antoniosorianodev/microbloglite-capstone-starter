@@ -20,7 +20,7 @@
     <!-- Page-specific CSS -->
     <link rel="stylesheet" href="./posts.css">
 
-    <title>/POSTS</title>
+    <title>Posts</title>
 
     <!-- Run BEFORE page is finished loading (before window.onload): -->
     <script src="../auth.js"></script>
@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plugin"
@@ -41,11 +41,8 @@
                 </svg>
             </a>
 
-            <!-- meh, since the user is going to get redirected anyway, why bother actually sending them to the profile page -->
+            <!-- meh, since the user is going to get redirected anyway, why bother actually sending them to walled off pages -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../">Home</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="../profile/">Profile</a>
                 </li>
@@ -53,15 +50,19 @@
                     <a class="nav-link active" aria-current="page" href="./">Posts</a>
                 </li>
             </ul>
-            <a href="./" class="btn btn-secondary" role="button" id="logoutButton">Logout</a>
+            <a href="./" class="btn btn-danger" role="button" id="logoutButton">Logout</a>
         </div>
     </nav>
 
-    <header>
-        <h1>POSTS PAGE</h1>
-    </header>
 
-    <main class="mx-auto w-25" id="main"></main>
+    <main class="d-flex flex-column align-items-center">
+        <header class="my-3">
+            <h1>Welcome to <code>POSTS PAGE</code></h1>
+        </header>
+        <section class="mx-auto w-50" id="postsSection">
+
+        </section>
+    </main>
 
     <footer></footer>
 
