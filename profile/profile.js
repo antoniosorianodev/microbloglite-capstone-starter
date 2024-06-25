@@ -3,15 +3,49 @@
 window.onload = () => {
     // not ideal since I am declaring loginData twice, but this I wanted to reuse the function else where
     // we'll see how I feel later
+    // ALSO, look in starter code this is probably not needed
+
     const username = parseLoginData("username");
     const token = parseLoginData("token");
     const profileForm = document.querySelector("#profileForm");
+    const card = document.querySelector("#cardDescription");
 
-    displayProfileData(username, token);
+    const newPostForm = document.querySelector("#newPostForm");
+    newPostForm.addEventListener("submit", (event) => createNewPost(event, token));
+
+    displayProfileData(card, username, token);
 
     const logoutButton = document.querySelector("#logoutButton");
     logoutButton.addEventListener("click", logout);
     profileForm.addEventListener("submit", (event) => updateProfile(event, username, token));
+}
+
+async function createNewPost(event, token) {
+    event.preventDefault();
+
+    const form = event.target;
+
+    try {
+        let response = await fetch(`${apiBaseURL}/api/posts`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify({
+                text: form.text.value
+            })
+        });
+
+        let data = await response.json();
+
+        if (response.ok) {
+            alert("Yipeee! New post made");
+        }
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 async function updateProfile(event, username, token) {
@@ -34,10 +68,24 @@ async function updateProfile(event, username, token) {
         let data = await response.json();
 
         if (response.ok) {
-            profileForm.bio.value = data.bio;
-            profileForm.fullName.value = data.fullName;
-            profileForm.updatedAt.value = data.updatedAt;
-            alert("Profile successfully updated")
+            document.querySelector("#cardDescription").innerHTML = `
+            <div>
+                <div>
+                    <b>Username:</b>
+                    <div>${data.username}</div>
+                </div>
+                <div>
+                    <b>Joined:</b>
+                    <div>${data.createdAt}</div>
+                </div>
+                <div>
+                    <b>Updated:</b>
+                    <div>${data.updatedAt}</div>
+                </div>
+            </div>
+            `;
+
+            alert("Profile successfully updated");
         }
     } catch (error) {
         console.log(error);
@@ -51,7 +99,7 @@ function parseLoginData(property) {
     return loginDataAsObject[`${property}`];
 }
 
-async function displayProfileData(username, token) {
+async function displayProfileData(card, username, token) {
     let response = await fetch(`${apiBaseURL}/api/users/${username}`, {
         headers: {
             Authorization: `Bearer ${token}`
@@ -59,9 +107,25 @@ async function displayProfileData(username, token) {
     });
     let data = await response.json();
 
+    populateCard(card, data);
+
     profileForm.fullName.value = data.fullName;
-    profileForm.username.value = data.username;
     profileForm.bio.value = data.bio;
-    profileForm.createdAt.value = data.createdAt;
-    profileForm.updatedAt.value = data.updatedAt;
+}
+
+function populateCard(card, data) {
+    card.innerHTML = `
+    <div>
+        <b>Username:</b>
+        <div>${data.username}</div>
+    </div>
+    <div>
+        <b>Joined:</b>
+        <div>${(new Date(data.createdAt)).toLocaleString()}</div>
+    </div>
+    <div>
+        <b>Updated:</b>
+        <div>${(new Date(data.updatedAt)).toLocaleString()}</div>
+    </div>
+    `;
 }

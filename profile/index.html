@@ -19,7 +19,7 @@
     <!-- Page-specific CSS -->
     <link rel="stylesheet" href="./profile.css">
 
-    <title>Login to the Microblog Network!</title>
+    <title>Profile</title>
 
     <!-- Run BEFORE page is finished loading (before window.onload - don't add the `defer` attribute): -->
     <script src="../auth.js"></script>
@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plugin"
@@ -47,48 +47,67 @@
                     <a class="nav-link" aria-current="page" href="../posts/">Posts</a>
                 </li>
             </ul>
-            <a href="./" class="btn btn-secondary" role="button" id="logoutButton">Logout</a>
+            <a href="./" class="btn btn-danger" role="button" id="logoutButton">Logout</a>
         </div>
     </nav>
 
-    <header>
-        <h1>Welcome to <code>PROFILE PAGE</code></h1>
-    </header>
+    <main class="d-flex flex-column align-items-center">
+        <header class="my-3">
+            <h1>Welcome to <code>PROFILE PAGE</code></h1>
+        </header>
+        <section class="d-flex flex-row justify-content-around w-75">
 
-    <form id="profileForm">
-        <div>
-            <label for="fullName">Full Name:</label>
-            <input type="text" name="fullName" required>
-        </div>
+            <div class="card p-3 w-25">
+                <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="currentColor"
+                    class="bi bi-person-circle card-img-top" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                    <path fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                </svg>
+                <div class="card-body" id="cardDescription">
 
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" name="username" disabled>
-        </div>
+                </div>
 
-        <div>
-            <label for="bio">Bio:</label>
-            <input type="text" name="bio" required>
-        </div>
+                <form id="profileForm" autocomplete="off">
+                    <div class="mb-3">
+                        <label class="form-label" for="fullName">Full Name:</label>
+                        <input class="form-control" type="text" name="fullName" required>
+                    </div>
 
-        <div>
-            <label for="createdAt">Joined:</label>
-            <input type="text" name="createdAt" disabled>
-        </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="bio">Bio:</label>
+                        <textarea class="form-control" type="text" name="bio" required></textarea>
+                    </div>
 
-        <div>
-            <label for="updatedAt">Updated:</label>
-            <input type="text" name="updatedAt" disabled>
-        </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="password">New Password:</label>
+                        <input class="form-control" type="password" name="password" minlength="6" required>
+                    </div>
 
-        <div>
-            <label for="password">New Password:</label>
-            <input type="password" name="password" minlength="6" required>
-        </div>
+                    <button class="btn btn-info" id="updateButton">Update</button>
+                </form>
 
-        <button id="updateButton">Update</button>
-    </form>
+            </div>
 
+            <div class="p-3 w-25">
+                <form id="newPostForm" autocomplete="off">
+                    <label for="text">New Post:</label>
+                    <textarea class="form-control mb-3" type="text" name="text"></textarea>
+
+                    <button class="btn btn-warning">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path
+                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd"
+                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                        </svg> Create Posts
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
     <footer></footer>
 
     <!-- Page-specific code -->
