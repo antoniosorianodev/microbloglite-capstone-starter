@@ -5,11 +5,43 @@ window.onload = () => {
     // we'll see how I feel later
     const username = parseLoginData("username");
     const token = parseLoginData("token");
+    const profileForm = document.querySelector("#profileForm");
 
     displayProfileData(username, token);
 
     const logoutButton = document.querySelector("#logoutButton");
     logoutButton.addEventListener("click", logout);
+    profileForm.addEventListener("submit", (event) => updateProfile(event, username, token));
+}
+
+async function updateProfile(event, username, token) {
+    event.preventDefault();
+
+    try {
+        let response = await fetch(`${apiBaseURL}/api/users/${username}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify({
+                password: profileForm.password.value,
+                bio: profileForm.bio.value,
+                fullName: profileForm.fullName.value
+            })
+        });
+
+        let data = await response.json();
+
+        if (response.ok) {
+            profileForm.bio.value = data.bio;
+            profileForm.fullName.value = data.fullName;
+            profileForm.updatedAt.value = data.updatedAt;
+            alert("Profile successfully updated")
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 function parseLoginData(property) {
@@ -27,11 +59,9 @@ async function displayProfileData(username, token) {
     });
     let data = await response.json();
 
-    document.querySelector("#main").innerHTML = `
-    <div>fullName${data.fullName}</div>
-    <div>username${data.username}</div>
-    <div>bio${data.bio}</div>
-    <div>createdAt${data.createdAt}</div>
-    <div>updatedAt${data.updatedAt}</div>
-    `;
+    profileForm.fullName.value = data.fullName;
+    profileForm.username.value = data.username;
+    profileForm.bio.value = data.bio;
+    profileForm.createdAt.value = data.createdAt;
+    profileForm.updatedAt.value = data.updatedAt;
 }
