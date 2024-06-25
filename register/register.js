@@ -24,12 +24,20 @@ async function createUser(event) {
         });
 
         let newUser = await response.json();
+        const responseCode = response.status;
 
-        if (response.status === 201) {
-            alert("Success! New user created");
-            window.location.href = "../"
-        } else if (response.status === 409) {
-            alert("Sorry, that user already exists");
+        // this is may or may not the best way to handle errors but it covers everything? idk will have to ask
+        switch (responseCode) {
+            case 201:
+                alert("Success! New user created");
+                window.location.href = "../"
+                break;
+            case 400:
+                alert("Bad request :L")
+                break;
+            case 409:
+                alert("Sorry, that user already exists");
+                break;
         }
 
     } catch (error) {
