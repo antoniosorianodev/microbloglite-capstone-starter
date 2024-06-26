@@ -129,3 +129,18 @@ function populateCard(card, data) {
     </div>
     `;
 }
+
+// code mostly stolen straight from Gravatar documentation
+document.addEventListener('DOMContentLoaded', () => {
+    const loginData = getLoginData();
+    console.log(loginData);
+
+    // Step 1: Hash your email address using SHA-256.
+    const hashedEmail = CryptoJS.SHA256(`${loginData.username}`);
+
+    // Step 2: Construct the Gravatar URL.
+    const gravatarUrl = `https://www.gravatar.com/avatar/${hashedEmail}`;
+
+    // Step 3: Set the image source to the Gravatar URL.
+    document.getElementById('gravatar-image').src = gravatarUrl;
+});

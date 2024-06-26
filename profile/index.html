@@ -58,12 +58,7 @@
         <section class="d-flex flex-row justify-content-around w-75">
 
             <div class="card p-3 w-25">
-                <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="currentColor"
-                    class="bi bi-person-circle card-img-top" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-                    <path fill-rule="evenodd"
-                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-                </svg>
+                <img id="gravatar-image">
                 <div class="card-body" id="cardDescription">
 
                 </div>
@@ -92,7 +87,7 @@
             <div class="p-3 w-25">
                 <form id="newPostForm" autocomplete="off">
                     <label for="text">New Post:</label>
-                    <textarea class="form-control mb-3" type="text" name="text"></textarea>
+                    <textarea class="form-control mb-3" type="text" name="text" maxlength="280"></textarea>
 
                     <button class="btn btn-warning">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -106,9 +101,13 @@
                 </form>
             </div>
         </section>
-
     </main>
     <footer></footer>
+
+    <!-- CryptoJS, needed for profile pictures -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"
+        integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Page-specific code -->
     <script src="./profile.js"></script>
