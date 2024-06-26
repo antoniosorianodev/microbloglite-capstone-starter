@@ -1,1 +1,9 @@
 /* Posts Page CSS */
+
+.liked {
+    color: red;
+}
+
+.unliked {
+    color: blue;
+}
