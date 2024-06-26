@@ -3,31 +3,70 @@
 "use strict";
 
 window.onload = () => {
-    const token = parseToken();
-
-    displayPosts(token);
-
+    const sortDDL = document.querySelector("#sortDDL");
     const logoutButton = document.querySelector("#logoutButton");
+    const postsSection = document.querySelector("#postsSection");
+
+    displayPosts(sortDDL, postsSection);
+
     logoutButton.addEventListener("click", logout);
+    sortDDL.addEventListener("change", (event) => displayPosts(event.target, postsSection));
 }
 
-async function displayPosts(token) {
+async function getPosts() {
+    const loginData = getLoginData();
 
-    let response = await fetch(`${apiBaseURL}/api/posts`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
+    try {
+        let response = await fetch(`${apiBaseURL}/api/posts`, {
+            headers: {
+                Authorization: `Bearer ${loginData.token}`
+            }
+        });
 
-    let posts = await response.json();
+        let posts = await response.json();
 
-    const postsSection = document.querySelector("#postsSection");
+        return posts;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function displayPosts(dropdown, postsSection) {
+    // this also serves as a refresh since it's a new api call, maybe do on page load and never again? idk
+    let posts = await getPosts();
+
+    // sort functionality for displaying posts
+    switch (dropdown.value) {
+        case "author":
+            posts.sort(function (a, b) {
+                if (a.username.toLowerCase() < b.username.toLowerCase()) {
+                    return -1;
+                }
+                if (a.username.toLowerCase() > b.username.toLowerCase()) {
+                    return 1;
+                }
+                return 0;
+            });
+            break;
+        case "likes":
+            posts.sort((a, b) => b.likes.length - a.likes.length);
+            break;
+        default:
+            // everything else falls in here, even the "recent" case
+            // that's good because it automatically comes sorted by most recent from api, no need to 
+            console.log("how did I get here?");
+            break;
+    }
+
+    // empty the posts section before adding more
+    postsSection.innerHTML = "";
+
     posts.forEach(post => {
-        const newPost = document.createElement("section");
+        const newPost = document.createElement("div");
         newPost.innerHTML = `
             <div class="card mb-3 p-3">
             <div class="d-flex flex-row justify-content-between">
-                <div class="pb-3"><b><i>${post.username}</i></b></div>
+                <div class="pb-3"><b><i>@${post.username}</i></b></div>
                 <div>${(new Date(post.createdAt)).toLocaleString()}</div>
             </div>
                 <div class="pb-3">${post.text}</div>
@@ -41,11 +80,4 @@ async function displayPosts(token) {
         `;
         postsSection.appendChild(newPost);
     });
-}
-
-function parseToken() {
-    const loginData = localStorage.getItem("login-data");
-    const loginDataAsObject = JSON.parse(loginData);
-
-    return loginDataAsObject.token;
 }
