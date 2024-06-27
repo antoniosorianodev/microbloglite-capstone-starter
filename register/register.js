@@ -4,26 +4,25 @@ window.onload = () => {
     const registerForm = document.querySelector("#register");
 
     registerForm.addEventListener("submit", (event) => createUser(event));
-
-    const logoutButton = document.querySelector("#logoutButton");
-    logoutButton.addEventListener("click", logout);
 }
 
 async function createUser(event) {
+    // this prevents the submit event's behaviours (refreshing the page)
     event.preventDefault();
 
-    let formData = new FormData(event.target);
-    let formDataAsObject = Object.fromEntries(formData);
+    // this takes the register form and creates an object from it's entries
+    const formData = new FormData(event.target);
+    const formDataAsObject = Object.fromEntries(formData);
 
     try {
 
-        let response = await fetch(`${apiBaseURL}/api/users`, {
+        const response = await fetch(`${apiBaseURL}/api/users`, {
             method: "POST",
             headers: { "Content-type": "application/json; charset=UTF-8" },
             body: JSON.stringify(formDataAsObject)
         });
 
-        let newUser = await response.json();
+        const newUser = await response.json();
         const responseCode = response.status;
 
         // this is may or may not the best way to handle errors but it covers everything? idk will have to ask
