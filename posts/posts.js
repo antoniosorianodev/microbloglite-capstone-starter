@@ -46,15 +46,7 @@ async function displayPosts(dropdown, postsSection, token, username) {
     // sort functionality for displaying posts
     switch (dropdown.value) {
         case "author":
-            posts.sort(function (a, b) {
-                if (a.username.toLowerCase() < b.username.toLowerCase()) {
-                    return -1;
-                }
-                if (a.username.toLowerCase() > b.username.toLowerCase()) {
-                    return 1;
-                }
-                return 0;
-            });
+            posts.sort((a, b) => a.username.localeCompare(b.username));
             break;
         case "likes":
             posts.sort((a, b) => b.likes.length - a.likes.length);
