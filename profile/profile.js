@@ -1,26 +1,32 @@
 "use strict"
 
 window.onload = () => {
-    // not ideal since I am declaring loginData twice, but this I wanted to reuse the function else where
-    // we'll see how I feel later
-    // ALSO, look in starter code this is probably not needed
+    // these lines get the login data and save the username and token properties from it respectively,
+    // this is so that we only do this logic on page load and can pass down the values where needed, without recalculating
+    const loginData = getLoginData();
+    const username = loginData.username;
+    const token = loginData.token;
 
-    const username = parseLoginData("username");
-    const token = parseLoginData("token");
-    const profileForm = document.querySelector("#profileForm");
+    // navbar element
+    const logoutButton = document.querySelector("#logoutButton");
+
+    // profile section elements
     const card = document.querySelector("#cardDescription");
+    const profileForm = document.querySelector("#profileForm");
 
+    // post section elements
     const newPostForm = document.querySelector("#newPostForm");
-    newPostForm.addEventListener("submit", (event) => createNewPost(event, token));
 
+    getProfilePicture(username);
     displayProfileData(card, username, token);
 
-    const logoutButton = document.querySelector("#logoutButton");
     logoutButton.addEventListener("click", logout);
+    newPostForm.addEventListener("submit", (event) => createNewPost(event, token));
     profileForm.addEventListener("submit", (event) => updateProfile(event, username, token));
 }
 
 async function createNewPost(event, token) {
+    // this prevents the submit event's behaviours (refreshing the page)
     event.preventDefault();
 
     const form = event.target;
@@ -40,7 +46,8 @@ async function createNewPost(event, token) {
         let data = await response.json();
 
         if (response.ok) {
-            alert("Yipeee! New post made");
+            alert("Post has been successfully created. Yipeee!");
+            window.location.href = "../posts/"
         }
         console.log(data);
     } catch (error) {
@@ -49,6 +56,7 @@ async function createNewPost(event, token) {
 }
 
 async function updateProfile(event, username, token) {
+    // this prevents the submit event's behaviours (refreshing the page)
     event.preventDefault();
 
     try {
@@ -76,27 +84,21 @@ async function updateProfile(event, username, token) {
                 </div>
                 <div>
                     <b>Joined:</b>
-                    <div>${data.createdAt}</div>
+                    <div>${new Date(data.createdAt).toLocaleString()}</div>
                 </div>
                 <div>
                     <b>Updated:</b>
-                    <div>${data.updatedAt}</div>
+                    <div>${new Date(data.updatedAt).toLocaleString()}</div>
                 </div>
             </div>
             `;
 
-            alert("Profile successfully updated");
+            alert("Profile has been successfully updated. Yipeee!");
+            location.reload();
         }
     } catch (error) {
         console.log(error);
     }
-}
-
-function parseLoginData(property) {
-    const loginData = localStorage.getItem("login-data");
-    const loginDataAsObject = JSON.parse(loginData);
-
-    return loginDataAsObject[`${property}`];
 }
 
 async function displayProfileData(card, username, token) {
@@ -130,17 +132,14 @@ function populateCard(card, data) {
     `;
 }
 
-// code mostly stolen straight from Gravatar documentation
-document.addEventListener('DOMContentLoaded', () => {
-    const loginData = getLoginData();
-    console.log(loginData);
-
+// code mostly stolen straight from Gravatar documentation, but tweaked for my use case
+function getProfilePicture(username) {
     // Step 1: Hash your email address using SHA-256.
-    const hashedEmail = CryptoJS.SHA256(`${loginData.username}`);
+    const hashedEmail = CryptoJS.SHA256(`${username}`);
 
     // Step 2: Construct the Gravatar URL.
     const gravatarUrl = `https://www.gravatar.com/avatar/${hashedEmail}`;
 
     // Step 3: Set the image source to the Gravatar URL.
-    document.getElementById('gravatar-image').src = gravatarUrl;
-});
+    document.querySelector("#gravatar-image").src = gravatarUrl;
+}

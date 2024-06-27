@@ -32,12 +32,12 @@
 <body>
     <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="../posts/">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plugin"
                     viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                         d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0" />
-                </svg>
+                </svg> &nbsp; &nbsp;Connect Social
             </a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -55,10 +55,10 @@
         <header class="my-3">
             <h1>Welcome to <code>PROFILE PAGE</code></h1>
         </header>
-        <section class="d-flex flex-row justify-content-around w-75">
+        <section class="d-flex flex-row justify-content-around w-75" id="profileSection">
 
             <div class="card p-3 w-25">
-                <img id="gravatar-image">
+                <img class="rounded-circle p-3" id="gravatar-image">
                 <div class="card-body" id="cardDescription">
 
                 </div>
@@ -84,7 +84,7 @@
 
             </div>
 
-            <div class="p-3 w-25">
+            <section class="p-3 w-25" id="newPostSection">
                 <form id="newPostForm" autocomplete="off">
                     <label for="text">New Post:</label>
                     <textarea class="form-control mb-3" type="text" name="text" maxlength="280"></textarea>
@@ -99,7 +99,7 @@
                         </svg> Create Post
                     </button>
                 </form>
-            </div>
+            </section>
         </section>
     </main>
     <footer></footer>
